@@ -14,9 +14,15 @@ RUN apk add --no-cache \
 # Install Hermes Agent
 RUN curl -fsSL https://hermes-agent.nousresearch.com/install.sh | bash
 
+# Install optional dependencies required by the web dashboard.
+RUN python3 -m pip install --no-cache-dir --break-system-packages "hermes-agent[web,pty]"
+
 # Add Hermes to PATH
 ENV PATH="/root/.local/bin:${PATH}"
 ENV HERMES_HOME="/root/.hermes"
+
+COPY docker-entrypoint.sh /usr/local/bin/hermes-docker-entrypoint
+RUN chmod +x /usr/local/bin/hermes-docker-entrypoint
 
 # Expose Hermes ports
 # 9119 = Web UI/API
@@ -24,4 +30,5 @@ ENV HERMES_HOME="/root/.hermes"
 EXPOSE 9119 8642
 
 # Start Hermes
-CMD ["hermes", "gateway", "run"]
+ENTRYPOINT ["hermes-docker-entrypoint"]
+CMD ["gateway", "run"]
