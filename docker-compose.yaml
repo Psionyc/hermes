@@ -8,10 +8,6 @@ services:
     container_name: hermes-agent
     restart: unless-stopped
 
-    # Make the dashboard reachable to Dokploy/Traefik without publishing it directly.
-    expose:
-      - "9119"
-
     # Persist Hermes data
     volumes:
       - hermes_data:/root/.hermes
