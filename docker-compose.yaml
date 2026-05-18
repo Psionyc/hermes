@@ -19,6 +19,7 @@ services:
     environment:
       # Explicitly set data directory
       HERMES_HOME: /root/.hermes
+      HERMES_DASHBOARD: 1
 
 volumes:
   hermes_data:
