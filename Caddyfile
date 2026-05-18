@@ -3,5 +3,7 @@
     {$HERMES_AUTH_USER} {$HERMES_AUTH_HASH}
   }
 
-  reverse_proxy hermes:9119
+  reverse_proxy hermes:9119 {
+    header_up -Authorization
+  }
 }
