@@ -24,4 +24,4 @@ ENV HERMES_HOME="/root/.hermes"
 EXPOSE 9119 8642
 
 # Start Hermes
-CMD ["hermes", "gateway", "start", "--host", "0.0.0.0", "--port", "9119"]
+CMD ["hermes", "gateway", "run"]
