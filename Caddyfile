@@ -1,0 +1,7 @@
+:8080 {
+  basicauth {
+    {$HERMES_AUTH_USER} {$HERMES_AUTH_HASH}
+  }
+
+  reverse_proxy hermes:9119
+}

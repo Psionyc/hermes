@@ -23,5 +23,22 @@ services:
       HERMES_DASHBOARD_HOST: "0.0.0.0"
       HERMES_DASHBOARD_PORT: "9119"
 
+  caddy:
+    image: caddy:2
+    container_name: hermes-caddy
+    restart: unless-stopped
+    depends_on:
+      - hermes
+
+    # Route your Dokploy domain to this service on container port 8080.
+    expose:
+      - "8080"
+
+    env_file:
+      - .env
+
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+
 volumes:
   hermes_data:
