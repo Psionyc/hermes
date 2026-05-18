@@ -8,9 +8,9 @@ services:
     container_name: hermes-agent
     restart: unless-stopped
 
-    # Expose Hermes web UI/API
-    ports:
-      - "9119:9119"
+    # Make the dashboard reachable to Dokploy/Traefik without publishing it directly.
+    expose:
+      - "9119"
 
     # Persist Hermes data
     volumes:
@@ -19,7 +19,9 @@ services:
     environment:
       # Explicitly set data directory
       HERMES_HOME: /root/.hermes
-      HERMES_DASHBOARD: 1
+      HERMES_DASHBOARD: "1"
+      HERMES_DASHBOARD_HOST: "0.0.0.0"
+      HERMES_DASHBOARD_PORT: "9119"
 
 volumes:
   hermes_data:
